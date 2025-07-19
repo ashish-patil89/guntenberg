@@ -1,5 +1,6 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../repository/transaction_repository.dart';
 
 // States
@@ -10,13 +11,16 @@ abstract class TransactionState extends Equatable {
 }
 
 class TransactionInitial extends TransactionState {}
+
 class TransactionLoading extends TransactionState {}
+
 class TransactionSuccess extends TransactionState {
   final List<dynamic> data; // Replace dynamic with your model later
   const TransactionSuccess(this.data);
   @override
   List<Object?> get props => [data];
 }
+
 class TransactionError extends TransactionState {
   final String message;
   const TransactionError(this.message);
@@ -38,4 +42,4 @@ class TransactionCubit extends Cubit<TransactionState> {
       emit(TransactionError(e.toString()));
     }
   }
-} 
+}
